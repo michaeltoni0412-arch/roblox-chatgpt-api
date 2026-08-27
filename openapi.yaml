@@ -1,0 +1,52 @@
+openapi: 3.1.0
+info:
+  title: Roblox Code API
+  version: 1.0.0
+  description: API for sending and testing code with a Roblox Studio development plugin.
+
+servers:
+  - url: https://roblox-chatgpt-api.onrender.com/
+
+paths:
+  /status:
+    get:
+      operationId: getStatus
+      summary: Check whether the API is running
+      responses:
+        "200":
+          description: API status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  running:
+                    type: boolean
+
+  /send-code:
+    post:
+      operationId: sendCode
+      summary: Send code to the development system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - code
+              properties:
+                code:
+                  type: string
+      responses:
+        "200":
+          description: Code received
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  received:
+                    type: string
